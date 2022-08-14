@@ -256,14 +256,14 @@ bool Feld::oeffneNachbarn(int x, int y)
         if(zahlGefunden == true) {
             break;
         }
-        for(int i = x; i < breite; i++) {
-            for(int j = y; j < hoehe; j++) {
-                if (spielfeld.at(i).at(j).belegung == Belegung::mine) {
-                    zahlGefunden = true;
-                }
-                spielfeld.at(i).at(j).belegung = Belegung::aufgedeckt;
-            }
-        }
+//         for(int i = x; i < breite; i++) {
+//             for(int j = y; j < hoehe; j++) {
+//                 if (spielfeld.at(i).at(j).belegung == Belegung::mine) {
+//                     zahlGefunden = true;
+//                 }
+//                 spielfeld.at(i).at(j).belegung = Belegung::aufgedeckt;
+//             }
+//         }
 //         while (zahlGefunden == false) {
 //             while (zahlGefunden == false) {
 //                 if (spielfeld.at(x + erweitern).at(y + erweitern).belegung == Belegung::mine) {
