@@ -193,7 +193,7 @@ bool Feld::spielen()
 
 bool Feld::oeffneNachbarn(int x, int y)
 {
-if(x > breite - 1 || x < 0 || y > hoehe - 1 || y < 0 || spielfeld.at(x).at(y).belegung != offen) {
+    if(x > breite - 1 || x < 0 || y > hoehe - 1 || y < 0 || spielfeld.at(x).at(y).belegung != offen) {
         return false;
     }
 
