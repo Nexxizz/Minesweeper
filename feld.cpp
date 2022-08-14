@@ -193,85 +193,24 @@ bool Feld::spielen()
 
 bool Feld::oeffneNachbarn(int x, int y)
 {
-//    bool zahlGefunden = false;
-//    while (zahlGefunden == false) {
-//        for(size_t i = x; i < breite; i++) {
-//            for(size_t j = y; j < hoehe; j++) {
-//                if(spielfeld.at(i).at(j).mineNachbarfeld > 0) {
-//                    spielfeld.at(i).at(j).belegung = Belegung::aufgedeckt;
-//                    zahlGefunden = true;
-//                    break;
-//                }
-//                if(spielfeld.at(i).at(j).mineNachbarfeld == 0) {
-//                    spielfeld.at(i).at(j).belegung = Belegung::aufgedeckt;
-//                }
-//            }
-//            if(zahlGefunden == true){
-//                break;
-//            }
-//        }
-//    }
-
-    int erweitern = 1;
-    bool zahlGefunden = false;
-    //    int i = x;
-    //    int j = y;
-    while (x + erweitern < breite && x - erweitern >= 0 && y + erweitern < breite && y - erweitern >= 0) {
-        cout << erweitern << endl;
-        cout << "x + erweitern: " << x + erweitern << " x - erweitern: " << x - erweitern << endl;
-        cout << "y + erweitern: " << y + erweitern << " y - erweitern: " << y - erweitern << endl;
-        erweitern++;
-        for (size_t i = x; i < breite; i++) {
-            if (spielfeld.at(i).at(y + erweitern).mineNachbarfeld > 0) {
-                zahlGefunden = true;
-                break;
-            } else {
-                spielfeld.at(i).at(y + erweitern).belegung = Belegung::aufgedeckt;
-            }
-        }
-        for (size_t i = y; i < hoehe; i++) {
-            if (spielfeld.at(x + erweitern).at(i).mineNachbarfeld > 0) {
-                zahlGefunden = true;
-                break;
-            } else {
-                spielfeld.at(x + erweitern).at(i).belegung = Belegung::aufgedeckt;
-            }
-        }
-        for (size_t i = x; i >= 0; i--) {
-            if (spielfeld.at(i).at(y - erweitern).mineNachbarfeld > 0) {
-                zahlGefunden = true;
-                break;
-            } else {
-                spielfeld.at(i).at(y - erweitern).belegung = Belegung::aufgedeckt;
-            }
-        }
-        for (size_t i = y; i >= 0; i--) {
-            if (spielfeld.at(x - erweitern).at(i).mineNachbarfeld > 0) {
-                zahlGefunden = true;
-                break;
-            } else {
-                spielfeld.at(x - erweitern).at(i).belegung = Belegung::aufgedeckt;
-            }
-        }
-        if(zahlGefunden == true) {
-            break;
-        }
-//         for(int i = x; i < breite; i++) {
-//             for(int j = y; j < hoehe; j++) {
-//                 if (spielfeld.at(i).at(j).belegung == Belegung::mine) {
-//                     zahlGefunden = true;
-//                 }
-//                 spielfeld.at(i).at(j).belegung = Belegung::aufgedeckt;
-//             }
-//         }
-//         while (zahlGefunden == false) {
-//             while (zahlGefunden == false) {
-//                 if (spielfeld.at(x + erweitern).at(y + erweitern).belegung == Belegung::mine) {
-//                     zahlGefunden = true;
-//                 }
-//                 spielfeld.at(x + erweitern).at(y + erweitern).belegung = Belegung::aufgedeckt;
-//             }
-//         }
+if(x > breite - 1 || x < 0 || y > hoehe - 1 || y < 0 || spielfeld.at(x).at(y).belegung != offen) {
+        return false;
     }
-    return true;
+
+    if(spielfeld.at(x).at(y).mineNachbarfeld > 0) {
+        spielfeld.at(x).at(y).belegung = Belegung::aufgedeckt;
+        return false;
+    }
+
+    spielfeld.at(x).at(y).belegung = Belegung::aufgedeckt;
+
+    oeffneNachbarn(x + 1, y);
+    oeffneNachbarn(x - 1, y);
+    oeffneNachbarn(x, y + 1);
+    oeffneNachbarn(x, y - 1);
+
+    oeffneNachbarn(x - 1, y - 1);
+    oeffneNachbarn(x + 1, y + 1);
+    oeffneNachbarn(x - 1, y + 1);
+    oeffneNachbarn(x + 1, y - 1);
 }
